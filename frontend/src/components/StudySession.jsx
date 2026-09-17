@@ -46,7 +46,7 @@ export default function StudySession() {
         lastMessage: res,
       });
     } catch (err) {
-      setError("Unable to start the session right now. Please try again.");
+      setError(`Unable to start the session right now. Error: ${err.message} (Target URL: ${CONFIG.API_BASE_URL})`);
     } finally {
       setLoadingText("");
     }

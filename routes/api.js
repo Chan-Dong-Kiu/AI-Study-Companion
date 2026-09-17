@@ -6,7 +6,8 @@ import {
   generateHint, 
   verifyEngagement, 
   generateFullSolution,
-  generateWeeklyReflection
+  generateWeeklyReflection,
+  verifyCorrectness
 } from '../services/ollamaService.js';
 
 const router = express.Router();
@@ -128,6 +129,23 @@ router.post('/session/:session_id/respond', async (req, res) => {
           content: "Could you try sharing your current train of thought, even if you're not sure it's correct?",
           requires_student_response: true,
           status: "active"
+        });
+      }
+
+      const isCorrect = await verifyCorrectness(session.question, message);
+      if (isCorrect) {
+        const congratsMsg = "Spot on! That is exactly correct. You did a great job figuring it out! Here is the complete breakdown for your reference:\n\n" + await generateFullSolution(session.question);
+        
+        db.prepare('UPDATE sessions SET stage = -1, status = "resolved" WHERE id = ?').run(session_id);
+        db.prepare('INSERT INTO messages (session_id, round, role, content) VALUES (?, ?, ?, ?)').run(session_id, session.stage, 'ai', congratsMsg);
+
+        return res.json({
+          session_id,
+          stage: -1,
+          response_type: "full_solution",
+          content: congratsMsg,
+          requires_student_response: false,
+          status: "resolved"
         });
       }
 

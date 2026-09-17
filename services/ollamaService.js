@@ -101,6 +101,25 @@ Reply with ONLY a JSON object like {"genuine": true}.`;
   }
 }
 
+export async function verifyCorrectness(question, reply) {
+  const prompt = `A student is trying to solve the following problem:
+Problem: """${question}"""
+
+The student provided this answer/thought:
+Student's reply: """${reply}"""
+
+Does the student's reply contain the correct and complete final answer or the correct core methodology to solve the problem?
+Reply with ONLY a JSON object like {"correct": true} or {"correct": false}. Be strict but fair.`;
+
+  const responseText = await callOllama(prompt, 'json');
+  try {
+    const data = JSON.parse(responseText);
+    return data.correct === true;
+  } catch (e) {
+    return false; // fail safe (assume not completely correct)
+  }
+}
+
 export async function generateHint(subject, question, historyBlock, currentRound) {
   const prompt = `You are a Socratic tutor for a first- or second-year Computer Science / Engineering student, subject: ${subject}.
 Never give away the final answer or solve the problem outright. Give exactly ONE short guiding question or minimal directional hint appropriate to hint round ${currentRound} (round 1 = gentle nudge, higher rounds = progressively more specific, but still never the full solution).

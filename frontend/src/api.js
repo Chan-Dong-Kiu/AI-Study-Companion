@@ -1,5 +1,5 @@
 export const CONFIG = {
-  API_BASE_URL: "http://127.0.0.1:4040",
+  API_BASE_URL: "http://localhost:3000",
   MAX_HINT_ROUNDS: 4,
   STUDENT_ID: "stu_001",
 };
