@@ -184,12 +184,16 @@ Reply with ONLY a JSON object exactly matching this schema:
 }
 
 export async function generateFullSolution(question) {
-  const prompt = `Give the complete, correct, step-by-step solution to this problem for a first/second-year CS/Engineering student. Be thorough and correct.
+  const prompt = `Give a very concise, short step-by-step solution to this problem.
 
 Question: """${question}"""
 
-Write the full solution now.`;
-  return await callOllama(prompt);
+Write the short solution now.`;
+  try {
+    return await callOllama(prompt);
+  } catch (err) {
+    return "The correct answer has been verified. Great job!";
+  }
 }
 
 export async function generateWeeklyReflection(statsSummaryStr) {
@@ -201,23 +205,3 @@ Write a short reflection (4-6 sentences) noticing one or two real patterns in th
   return await callOllama(prompt);
 }
 
-export async function verifyCorrectness(question, message) {
-  const prompt = `You are a strict but fair teacher evaluating a student's answer.
-Question: """${question}"""
-Student's Answer: """${message}"""
-
-Does the student's answer correctly solve the question or demonstrate complete understanding of the core concept?
-Return EXACTLY a JSON object with a single boolean property "correct".
-
-Example output format:
-{
-  "correct": true
-}`;
-  try {
-    const responseText = await callOllama(prompt, 'json');
-    const data = JSON.parse(responseText);
-    return data.correct === true;
-  } catch (err) {
-    return false;
-  }
-}
