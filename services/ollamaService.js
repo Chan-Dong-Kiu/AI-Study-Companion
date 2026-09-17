@@ -86,19 +86,14 @@ Reply with ONLY a JSON object like {"category":"Solve"}.`;
 }
 
 export async function verifyEngagement(reply) {
-  const prompt = `A student was given a hint and asked to share their own thinking before the next hint. Judge whether this reply shows genuine engagement (an attempt, a guess, a specific question, or an honest "I don't know where to start" WITH some context) versus a low-effort non-answer (like "ok", "next", "idk" alone, or near-empty text).
-
-Student's reply: """${reply}"""
-
-Reply with ONLY a JSON object like {"genuine": true}.`;
-
-  const responseText = await callOllama(prompt, 'json');
-  try {
-    const data = JSON.parse(responseText);
-    return data.genuine === true;
-  } catch (e) {
-    return true; // fail open
+  const lowEffortPatterns = [
+    /^i don't know$/i, /^idk$/i, /^tell me$/i, /^what is it$/i,
+    /^just give me the answer$/i, /^không biết$/i, /^chịu$/i
+  ];
+  for (const p of lowEffortPatterns) {
+    if (p.test(reply.trim())) return false;
   }
+  return true;
 }
 
 export async function verifyCorrectness(question, reply) {
