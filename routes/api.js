@@ -103,8 +103,8 @@ router.post('/session/:session_id/respond', async (req, res) => {
     if (effectiveAction === 'request_full_solution') {
       const solution = await generateFullSolution(session.question);
       
-      db.prepare('UPDATE sessions SET stage = -1, status = "resolved" WHERE id = ?').run(session_id);
-      db.prepare('INSERT INTO messages (session_id, round, role, content) VALUES (?, ?, ?, ?)').run(session_id, session.stage, 'ai', solution);
+      db.prepare("UPDATE sessions SET stage = -1, status = 'resolved' WHERE id = ?").run(session_id);
+      db.prepare("INSERT INTO messages (session_id, round, role, content) VALUES (?, ?, ?, ?)").run(session_id, session.stage, 'ai', solution);
 
       return res.json({
         session_id,
@@ -134,10 +134,10 @@ router.post('/session/:session_id/respond', async (req, res) => {
 
       const isCorrect = await verifyCorrectness(session.question, message);
       if (isCorrect) {
-        const congratsMsg = "Spot on! That is exactly correct. You did a great job figuring it out! Here is the complete breakdown for your reference:\n\n" + await generateFullSolution(session.question);
+        const congratsMsg = "Spot on! That is exactly correct. You did a great job figuring it out!\n\n" + await generateFullSolution(session.question);
         
-        db.prepare('UPDATE sessions SET stage = -1, status = "resolved" WHERE id = ?').run(session_id);
-        db.prepare('INSERT INTO messages (session_id, round, role, content) VALUES (?, ?, ?, ?)').run(session_id, session.stage, 'ai', congratsMsg);
+        db.prepare("UPDATE sessions SET stage = -1, status = 'resolved' WHERE id = ?").run(session_id);
+        db.prepare("INSERT INTO messages (session_id, round, role, content) VALUES (?, ?, ?, ?)").run(session_id, session.stage, 'ai', congratsMsg);
 
         return res.json({
           session_id,

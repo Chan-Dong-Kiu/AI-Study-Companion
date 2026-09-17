@@ -61,7 +61,7 @@ export default function StudySession() {
       setSessionState(prev => ({ ...prev, status: res.status, lastMessage: res }));
       setReply("");
     } catch (err) {
-      setError("Could not send your response. Please try again.");
+      setError(`Could not send your response. Error: ${err.message}`);
     } finally {
       setLoadingText("");
     }

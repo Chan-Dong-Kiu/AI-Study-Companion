@@ -108,8 +108,8 @@ Problem: """${question}"""
 The student provided this answer/thought:
 Student's reply: """${reply}"""
 
-Does the student's reply contain the correct and complete final answer or the correct core methodology to solve the problem?
-Reply with ONLY a JSON object like {"correct": true} or {"correct": false}. Be strict but fair.`;
+Does the student's reply contain the correct final answer, or demonstrate that they have figured out the core concept? 
+Reply with ONLY a JSON object like {"correct": true} or {"correct": false}. Be lenient and encouraging - if they show clear understanding or provide the right answer, return true.`;
 
   const responseText = await callOllama(prompt, 'json');
   try {
