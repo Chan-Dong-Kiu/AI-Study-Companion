@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StudyCompass — Hints First, Answers Later</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Interactive background stickers & ambient study atmosphere -->
+<div class="bg-stickers-layer" aria-hidden="true">
+  <!-- Top Left: Study Compass & North Star -->
+  <div class="sticker sticker--compass" title="Follow your direction">
+    <svg viewBox="0 0 64 64" width="60" height="60" fill="none">
+      <circle cx="32" cy="32" r="28" fill="#FFF2F4" stroke="#8A4853" stroke-width="2.5" stroke-dasharray="3 3"/>
+      <circle cx="32" cy="32" r="24" fill="#FFE4E9" stroke="#A6606B" stroke-width="1.5"/>
+      <polygon points="32,12 36,30 32,27 28,30" fill="#8A4853"/>
+      <polygon points="32,52 36,34 32,37 28,34" fill="#D7C1C3"/>
+      <circle cx="32" cy="32" r="3" fill="#8A4853"/>
+    </svg>
+    <span class="sticker-badge">Explore</span>
+  </div>
+
+  <!-- Top Right: Idea & Curiosity Lightbulb -->
+  <div class="sticker sticker--lightbulb" title="Aha moment!">
+    <svg viewBox="0 0 64 64" width="56" height="56" fill="none">
+      <ellipse cx="32" cy="27" rx="18" ry="19" fill="#FFF8E7" stroke="#9E6E26" stroke-width="2"/>
+      <path d="M25 45h14M26 49h12M28 53h8" stroke="#7E5443" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M23 34c1 4 4 7 9 7s8-3 9-7" stroke="#F5BA42" stroke-width="2" stroke-linecap="round"/>
+      <line x1="32" y1="3" x2="32" y2="7" stroke="#F5BA42" stroke-width="2" stroke-linecap="round"/>
+      <line x1="49" y1="12" x2="46" y2="15" stroke="#F5BA42" stroke-width="2" stroke-linecap="round"/>
+      <line x1="15" y1="12" x2="18" y2="15" stroke="#F5BA42" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="sticker-badge sticker-badge--warm">Think ✦</span>
+  </div>
+
+  <!-- Mid Left: Sticky Note / Step by Step -->
+  <div class="sticker sticker--note" title="Step by step">
+    <div class="sticker-note">
+      <span class="sticker-pin"></span>
+      <p class="sticker-note__heading">Step 1</p>
+      <div class="sticker-note__lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span class="sticker-note__tag">one bite at a time</span>
+    </div>
+  </div>
+
+  <!-- Mid Right: Cozy Mug / No Rush Focus -->
+  <div class="sticker sticker--mug" title="Take your time">
+    <svg viewBox="0 0 64 64" width="54" height="54" fill="none">
+      <path d="M18 24h24v22a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8V24z" fill="#FFE8F1" stroke="#735363" stroke-width="2"/>
+      <path d="M42 28h5a5 5 0 0 1 5 5v4a5 5 0 0 1-5 5h-5" stroke="#735363" stroke-width="2" stroke-linecap="round"/>
+      <path d="M24 16c0-4 4-4 4-8" stroke="#A6606B" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+      <path d="M34 16c0-4 4-4 4-8" stroke="#A6606B" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+    </svg>
+    <span class="sticker-badge sticker-badge--cozy">No Rush ☕</span>
+  </div>
+
+  <!-- Bottom Left: Paper Plane / Journey -->
+  <div class="sticker sticker--plane" title="Continuous progress">
+    <svg viewBox="0 0 64 64" width="52" height="52" fill="none">
+      <path d="M12 32l40-18-16 38-6-14-18-6z" fill="#FFF2F4" stroke="#8A4853" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M30 38l22-24" stroke="#8A4853" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- Floating Starbursts and Sparkles -->
+  <div class="ambient-sparkle sparkle-1">✦</div>
+  <div class="ambient-sparkle sparkle-2">✧</div>
+  <div class="ambient-sparkle sparkle-3">✴</div>
+  <div class="ambient-sparkle sparkle-4">✦</div>
+  <div class="ambient-sparkle sparkle-5">✧</div>
+</div>
+
+<header class="app-header">
+  <div class="app-header__inner">
+    <div class="brand">
+      <div class="brand__mark" aria-hidden="true">✦</div>
+      <div class="brand__text">
+        <span class="brand__name">StudyCompass</span>
+        <span class="brand__tagline">Hints first, answers later.</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Main Navigation">
+      <button class="tab is-active" id="tab-session" role="tab" aria-selected="true" data-view="session">
+        <span class="tab-icon">✦</span>
+        <span>Study Session</span>
+      </button>
+      <button class="tab" id="tab-journal" role="tab" aria-selected="false" data-view="journal">
+        <span class="tab-icon">📖</span>
+        <span>Weekly Journal</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="app-main">
+
+  <!-- ============ VIEW: STUDY SESSION ============ -->
+  <section id="view-session" class="view">
+
+    <div class="view-intro">
+      <span class="eyebrow-pill">
+        <span class="eyebrow-pill__dot"></span>
+        Gentle & mindful learning space
+      </span>
+      <h1 class="view-title">Study Session</h1>
+      <p class="view-subtitle">Ask anything you are stuck on — we will walk you through step by step, with zero pressure.</p>
+    </div>
+
+    <!-- Composer: visible when no session is active -->
+    <section class="card composer" id="composer" aria-label="Ask a question">
+      <div class="composer__head">
+        <label for="question-input" class="composer__label">
+          Your Question
+          <span class="tag-soft">Freeform text</span>
+        </label>
+        <span class="composer__hint-text">No subject selection needed</span>
+      </div>
+      <textarea id="question-input" rows="3"
+        placeholder="e.g. Can you guide me through solving this integral: ∫ x · e^x dx?"></textarea>
+      <div class="composer__footer">
+        <p class="composer__note">✦ Ask freely — we'll untangle each step together.</p>
+        <button class="btn btn-primary" id="btn-start">
+          <span>Start with 1 hint</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Thread: visible when session is active -->
+    <section class="thread hidden" id="thread" aria-label="Ongoing session">
+
+      <div class="thread__divider">
+        <span></span>
+        <p>Current Dialogue</p>
+        <span></span>
+      </div>
+
+      <!-- Student's initial question -->
+      <div class="student-question" id="student-question-card">
+        <div class="student-question__meta">
+          <span id="detected-subject-pill" class="tag-soft hidden"></span>
+        </div>
+        <p class="student-question__text" id="student-question-text"></p>
+      </div>
+
+      <!-- Dynamic response slot: contains exactly 1 block at any given time -->
+      <div id="response-slot"></div>
+
+      <!-- Loading / Thinking indicator -->
+      <div class="thinking hidden" id="thinking-indicator">
+        <span class="thinking__dot"></span>
+        <span class="thinking__dot"></span>
+        <span class="thinking__dot"></span>
+        <span id="thinking-text">Formulating a gentle hint for you...</span>
+      </div>
+
+      <!-- Connection / General Error Banner -->
+      <div class="banner banner--calm-error hidden" id="error-banner">
+        <p id="error-text">A temporary connection hiccup occurred. Let's try again.</p>
+        <button class="btn btn-ghost" id="btn-retry">Retry</button>
+      </div>
+
+      <!-- Student reply bar + actions -->
+      <div class="reply-bar hidden" id="reply-bar">
+        <div class="reply-bar__row">
+          <input type="text" id="reply-input" placeholder="Share your thoughts or first intuition..." />
+          <button class="btn btn-primary btn-round" id="btn-send" title="Send reflection">
+            <span>Send</span>
+          </button>
+        </div>
+        <div class="reply-bar__footer">
+          <p class="reply-bar__note">Press Enter to send · Take all the time you need</p>
+          <button class="link-btn" id="btn-full-solution">View full solution</button>
+        </div>
+      </div>
+
+      <!-- Resolved bar when session concludes -->
+      <div class="resolved-bar hidden" id="resolved-bar">
+        <div class="resolved-message">
+          <span class="resolved-icon">✦</span>
+          <p>This study session is complete. You did great today!</p>
+        </div>
+        <button class="btn btn-primary" id="btn-new-question">
+          <span>Ask a new question</span>
+        </button>
+      </div>
+
+    </section>
+  </section>
+
+  <!-- ============ VIEW: WEEKLY JOURNAL ============ -->
+  <section id="view-journal" class="view hidden">
+
+    <div class="view-intro">
+      <span class="eyebrow-pill">
+        <span class="eyebrow-pill__dot"></span>
+        A quiet look back
+      </span>
+      <h1 class="view-title">Weekly Journal</h1>
+      <p class="view-subtitle">No scores, no leaderboards — just meaningful insights about your learning momentum.</p>
+    </div>
+
+    <div class="journal-loading" id="journal-loading">
+      <span class="thinking__dot"></span>
+      <span class="thinking__dot"></span>
+      <span class="thinking__dot"></span>
+      <span>Reflecting on your week...</span>
+    </div>
+
+    <div id="journal-content" class="hidden">
+
+      <!-- 1. Reflection narrative card: front and center -->
+      <section class="card reflection-card">
+        <div class="reflection-card__badge">
+          <span>✦ Personalized Weekly Reflection</span>
+        </div>
+        <p class="reflection-card__text" id="reflection-message"></p>
+      </section>
+
+      <!-- 2. Gentle metrics row -->
+      <section class="stats-row" id="stats-row">
+        <!-- Rendered dynamically via JS -->
+      </section>
+
+    </div>
+
+    <div class="banner banner--calm-error hidden" id="journal-error-banner">
+      <p>Unable to retrieve this week's journal right now. Please try again.</p>
+      <button class="btn btn-ghost" id="btn-retry-journal">Retry</button>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  <p>StudyCompass — Hints first, answers later. Your growth, your pace.</p>
+</footer>
+
+<script src="config.js"></script>
+<script src="mock-api.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
