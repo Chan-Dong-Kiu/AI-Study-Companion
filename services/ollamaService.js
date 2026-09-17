@@ -200,3 +200,24 @@ Here is this week's usage data (private to the student only): ${statsSummaryStr}
 Write a short reflection (4-6 sentences) noticing one or two real patterns in this data, phrased gently and curiously, ending on an encouraging note. Do not just restate the numbers.`;
   return await callOllama(prompt);
 }
+
+export async function verifyCorrectness(question, message) {
+  const prompt = `You are a strict but fair teacher evaluating a student's answer.
+Question: """${question}"""
+Student's Answer: """${message}"""
+
+Does the student's answer correctly solve the question or demonstrate complete understanding of the core concept?
+Return EXACTLY a JSON object with a single boolean property "correct".
+
+Example output format:
+{
+  "correct": true
+}`;
+  try {
+    const responseText = await callOllama(prompt, 'json');
+    const data = JSON.parse(responseText);
+    return data.correct === true;
+  } catch (err) {
+    return false;
+  }
+}
